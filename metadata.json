@@ -1,0 +1,6 @@
+{
+  "name": "企業勞動裁罰數據分析與比較平台",
+  "description": "自動彙整全數企業勞基法裁罰數據，提供多維度視覺化圖表、全數企業總覽篩選、違規標籤統計與合規避坑風控決策分析。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
