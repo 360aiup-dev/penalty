@@ -30,6 +30,8 @@ export default function App() {
     if (match) setModalCompany(match);
   };
 
+  const totalFineWan = Math.round(ALL_VIOLATIONS.reduce((sum, v) => sum + v.fine, 0) / 10000);
+
   return (
     <div className="min-h-screen bg-slate-50/50 flex flex-col selection:bg-indigo-600 selection:text-white font-sans text-slate-800">
       {/* Top sticky navigation */}
@@ -77,7 +79,7 @@ export default function App() {
             <span className="font-semibold text-slate-700">
               企業勞動合規矩陣
             </span>
-            <span className="text-slate-400">· 完整收錄 {ALL_COMPANIES.length.toLocaleString()} 家企業共 {ALL_VIOLATIONS.length.toLocaleString()} 筆裁處案件（總額 8,490 萬）</span>
+            <span className="text-slate-400">· 完整收錄 {ALL_COMPANIES.length.toLocaleString()} 家企業共 {ALL_VIOLATIONS.length.toLocaleString()} 筆裁處案件（總額 {totalFineWan.toLocaleString()} 萬）</span>
           </div>
 
           <div className="flex items-center gap-4 text-[11px] text-slate-400">

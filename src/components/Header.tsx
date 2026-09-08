@@ -37,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({
                 企業勞動裁罰分析矩陣
               </h1>
               <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100">
-                {ALL_VIOLATIONS.length.toLocaleString()} 筆處分實錄 · 全數收錄（8,490 萬）
+                {ALL_VIOLATIONS.length.toLocaleString()} 筆處分實錄 · 全數收錄（{(totalFines / 10000).toLocaleString(undefined, { maximumFractionDigits: 1 })} 萬元）
               </span>
             </div>
             <p className="text-xs text-slate-400 mt-0.5 font-normal">

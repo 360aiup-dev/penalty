@@ -37,6 +37,25 @@ export const CompanyDirectory: React.FC<CompanyDirectoryProps> = ({
   const [pageSize, setPageSize] = useState<number>(25);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  // Precompute category and tag counts for dropdown options
+  const categoryCounts = useMemo(() => {
+    const map = new Map<string, number>();
+    ALL_COMPANIES.forEach(c => {
+      map.set(c.category, (map.get(c.category) || 0) + 1);
+    });
+    return map;
+  }, []);
+
+  const tagCounts = useMemo(() => {
+    const map = new Map<string, number>();
+    ALL_COMPANIES.forEach(c => {
+      c.tags.forEach(t => {
+        map.set(t, (map.get(t) || 0) + 1);
+      });
+    });
+    return map;
+  }, []);
+
   // Filter logic
   const filteredCompanies = useMemo(() => {
     return ALL_COMPANIES.filter(c => {
@@ -174,7 +193,7 @@ export const CompanyDirectory: React.FC<CompanyDirectoryProps> = ({
               <option value="ALL">全部產業 ({ALL_COMPANIES.length})</option>
               {ALL_CATEGORIES.map(cat => (
                 <option key={cat} value={cat}>
-                  {cat} ({ALL_COMPANIES.filter(c => c.category === cat).length})
+                  {cat} ({categoryCounts.get(cat) || 0})
                 </option>
               ))}
             </select>
@@ -191,9 +210,11 @@ export const CompanyDirectory: React.FC<CompanyDirectoryProps> = ({
               }}
               className="w-full py-1.5 px-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-medium"
             >
-              <option value="ALL">全部違規標籤</option>
+              <option value="ALL">全部違規主題 ({ALL_COMPANIES.length})</option>
               {ALL_TAGS.map(t => (
-                <option key={t} value={t}>{t}</option>
+                <option key={t} value={t}>
+                  {t} ({tagCounts.get(t) || 0})
+                </option>
               ))}
             </select>
           </div>
